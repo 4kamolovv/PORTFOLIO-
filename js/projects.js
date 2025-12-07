@@ -13,7 +13,7 @@ const nextBtn = document.getElementById("project-next");
 // Fetch projects.json and render
 async function loadProjects() {
   try {
-    const res = await fetch("./data/projects.json");
+    const res = await fetch("https://4kamolovv.github.io/docs/data/projects.json");
     projectsData = await res.json();
     renderProjects();
   } catch (e) {
