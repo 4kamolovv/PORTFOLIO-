@@ -1,5 +1,5 @@
 (function () {
-  emailjs.init("8zr2dWLfXzsKkWnS6"); // Initialize EmailJS
+  emailjs.init("lzSjNHf2xC7CCFHAq"); // Initialize EmailJS
 })();
 
 // DOM elements
@@ -64,7 +64,7 @@ form.addEventListener("submit", function (e) {
   const clmessage = clMessage.value.trim();
 
   // Send message to yourself
-  emailjs.send("service_1217c1d", "template_jhnls59", {
+  emailjs.send("service_jaiqx9b", "template_xcizmk4", {
     to_email: "kdoniyor213@gmail.com",
     message: `Isim: ${clname}\nEmail: ${clemail}\nXabar: ${clmessage}`
   })
