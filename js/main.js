@@ -133,13 +133,13 @@ document.querySelectorAll('.dropdown a[href^="#"]').forEach((link) => {
 let translations = {};
 async function loadTranslations() {
   try {
-    const res = await fetch("data/lang.json");
+    const res = await fetch("https://4kamolovv.github.io/docs/data/lang.json");
     translations = await res.json();
     
     const savedLang = localStorage.getItem("selectedLang") || "SystemLang";
     setLanguage(savedLang);
   } catch (err) {
-    console.error("Error data/lang.json:", err);
+    console.error("Error https://4kamolovv.github.io/docs/data/lang.json:", err);
   }
 }
 function getSystemLanguage() {
