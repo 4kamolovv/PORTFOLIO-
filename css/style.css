@@ -59,7 +59,7 @@
 
 @media (max-width: 480px) {
   .about-left-wrap {
-    padding: 28px 75px;
+    padding: 20px 16px;
   }
 
   .contact-wrapper {
@@ -118,6 +118,7 @@
   text-align: start;
   align-items: center;
   gap: 5px;
+  flex-wrap: wrap;
   opacity: 0;
   animation: fadeIn 1s ease forwards;
 }
@@ -362,6 +363,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .project-card {
@@ -424,7 +426,8 @@ user-select: none;
 }
 
 .contact-wrapper {
-  height: 350px;
+  min-height: 350px;
+  height: auto;
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -499,6 +502,8 @@ user-select: none;
   transition: color 0.2s ease;
   margin-bottom: 5px;
   cursor: pointer;
+  flex-wrap: wrap;
+  word-break: break-word;
 }
 
 .social-phonenum .social-icon {
@@ -569,6 +574,7 @@ user-select: none;
 
 .contact-form input,
 .contact-form textarea {
+  width: 100%;
   padding: 10px;
   border-radius: 12px;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -669,6 +675,186 @@ user-select: none;
 
 #project-prev {
   transform: rotate(180deg);
+}
+
+@media (max-width: 900px) {
+  .intro-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .about-wrapper {
+    margin-top: 120px;
+  }
+
+  .about-left-wrap,
+  .projects-description {
+    padding: 24px 28px;
+  }
+
+  .df-social {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+
+  .proj-btn {
+    width: 32px;
+    height: 68px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    width: min(94%, 450px);
+    height: auto;
+    padding: 10px 12px;
+    border-radius: 22px;
+  }
+
+  .nav-wrap {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 8px;
+  }
+
+  .nav-link-wrapper {
+    order: 3;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-inline: 0;
+    gap: 8px;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-item .nav-link {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item .dropdown {
+    position: static;
+    left: auto;
+    top: auto;
+    min-width: 100%;
+    margin-top: 6px;
+    border-radius: 14px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition: max-height 0.25s ease, padding 0.25s ease;
+  }
+
+  .nav-item:hover .dropdown,
+  .nav-item:focus-within .dropdown {
+    max-height: 320px;
+    padding: 8px 0;
+  }
+
+  .icon-text {
+    margin-left: auto;
+  }
+
+  .about-left-wrap,
+  .projects-description {
+    padding: 20px 16px;
+  }
+
+  .quote-open,
+  .quote-close {
+    width: 22px;
+    height: 22px;
+  }
+
+  .quote-open {
+    top: 14px;
+    left: 12px;
+  }
+
+  .quote-close {
+    right: 12px;
+    bottom: 14px;
+  }
+
+  .about-title {
+    text-align: left;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-section .df {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .project-card {
+    padding: 16px;
+  }
+
+  .proj-btn {
+    display: none;
+  }
+
+  .social-infa-1,
+  .social-infa-2 {
+    font-size: 22px;
+  }
+
+  .social-list {
+    flex-wrap: wrap;
+  }
+
+  .contact-wrapper {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .tech-rotation-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .tech-vscode-icon {
+    width: 78px;
+    height: 78px;
+  }
+
+  .tech-rotating-ring {
+    width: 205px;
+    height: 205px;
+  }
+
+  .tech-orbit-icon {
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
+      rotate(calc(-1 * var(--angle)));
+  }
+
+  @keyframes tech-counter-rotate {
+    from {
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
+        rotate(calc(-1 * var(--angle)));
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
+        rotate(calc(-1 * var(--angle) - 360deg));
+    }
+  }
 }
 
 /* docs style */

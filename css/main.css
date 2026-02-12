@@ -14,6 +14,12 @@
   --glass-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* backdrop-filter: var(--glass-backdrop);
 background: var(--glass-background);
 border: var(--glass-border);
@@ -66,7 +72,7 @@ body {
   overflow-x: hidden !important;
 }
 .container {
-  width: 1140px;
+  width: min(1140px, 100%);
   margin-inline: auto;
   padding-inline: 20px;
 }
@@ -289,7 +295,7 @@ a {
 /* header  */
 .navbar {
   position: relative;
-  width: 450px;
+  width: min(450px, calc(100% - 24px));
   height: 65px;
   margin: 8px auto 16px;
   border-radius: 40px;
@@ -316,6 +322,8 @@ a {
 .nav-wrap {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navbar::before {
@@ -480,7 +488,7 @@ a {
 }
 
 .footer-wrapper {
-  width: 50%;
+  width: min(860px, 92%);
   margin-inline: auto;
   margin-bottom: 20px;
   padding: 20px;
@@ -492,8 +500,8 @@ a {
 }
 
 .footer-content {
-  width: 600px;
-  height: 130px;
+  width: 100%;
+  min-height: 130px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

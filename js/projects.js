@@ -1,7 +1,6 @@
 // projects.js - handles project carousel loading from projects.json and language keys
 
 // Config
-const PROJECTS_VISIBLE = 3;
 let currentIndex = 0;
 let projectsData = [];
 
@@ -23,10 +22,11 @@ async function loadProjects() {
 
 function renderProjects() {
   projectsContainer.innerHTML = "";
+  const visibleCount = getVisibleCount();
 
   const slice = projectsData.slice(
     currentIndex,
-    currentIndex + PROJECTS_VISIBLE
+    currentIndex + visibleCount
   );
 
   slice.forEach((p) => {
@@ -41,16 +41,28 @@ function renderProjects() {
     projectsContainer.appendChild(card);
   });
 
-  updateButtons();
+  updateButtons(visibleCount);
 
   // refresh language for newly added elements
   let currentLang = localStorage.getItem("selectedLang") || "SystemLang";
   if (typeof setLanguage === "function") setLanguage(currentLang);
 }
 
-function updateButtons() {
+function updateButtons(visibleCount = getVisibleCount()) {
   prevBtn.disabled = currentIndex === 0;
-  nextBtn.disabled = currentIndex + PROJECTS_VISIBLE >= projectsData.length;
+  nextBtn.disabled = currentIndex + visibleCount >= projectsData.length;
+}
+
+function getVisibleCount() {
+  if (window.innerWidth <= 640) return 1;
+  if (window.innerWidth <= 1024) return 2;
+  return 3;
+}
+
+function normalizeIndex() {
+  const visibleCount = getVisibleCount();
+  const maxStart = Math.max(0, projectsData.length - visibleCount);
+  if (currentIndex > maxStart) currentIndex = maxStart;
 }
 
 // Events
@@ -62,10 +74,16 @@ prevBtn?.addEventListener("click", () => {
 });
 
 nextBtn?.addEventListener("click", () => {
-  if (currentIndex + PROJECTS_VISIBLE < projectsData.length) {
+  if (currentIndex + getVisibleCount() < projectsData.length) {
     currentIndex++;
     renderProjects();
   }
+});
+
+window.addEventListener("resize", () => {
+  if (!projectsData.length) return;
+  normalizeIndex();
+  renderProjects();
 });
 
 // Init
