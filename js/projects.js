@@ -3,6 +3,7 @@
 // Config
 let currentIndex = 0;
 let projectsData = [];
+let projectsLoaded = false;
 
 // DOM
 const projectsContainer = document.querySelector(".projects-grid");
@@ -11,9 +12,11 @@ const nextBtn = document.getElementById("project-next");
 
 // Fetch projects.json and render
 async function loadProjects() {
+  if (projectsLoaded) return;
   try {
     const res = await fetch("data/projects.json");
     projectsData = await res.json();
+    projectsLoaded = true;
     renderProjects();
   } catch (e) {
     console.error("Projects load error:", e);
@@ -33,7 +36,7 @@ function renderProjects() {
     const card = document.createElement("div");
     card.className = "project-card ripple";
     card.innerHTML = `
-      <img src="${p.propic}" class="project-img" />
+      <img src="${p.propic}" class="project-img" loading="lazy" decoding="async" alt="${p.proname}" />
       <h3 class="project-title" lang="${p.proname}"></h3>
       <p class="project-desc" lang="${p.prodesc}"></p>
       <a href="${p.prolink}"  target="_blank" class="btn">Live Demo</a>
@@ -80,11 +83,41 @@ nextBtn?.addEventListener("click", () => {
   }
 });
 
+let resizeTimer;
 window.addEventListener("resize", () => {
   if (!projectsData.length) return;
-  normalizeIndex();
-  renderProjects();
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    normalizeIndex();
+    renderProjects();
+  }, 120);
 });
 
+function initProjectsWhenVisible() {
+  const projectsSection = document.getElementById("mypro");
+  if (!projectsSection) {
+    loadProjects();
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    loadProjects();
+    return;
+  }
+
+  const sectionObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadProjects();
+        observer.unobserve(projectsSection);
+      });
+    },
+    { rootMargin: "400px 0px" }
+  );
+
+  sectionObserver.observe(projectsSection);
+}
+
 // Init
-loadProjects();
+initProjectsWhenVisible();

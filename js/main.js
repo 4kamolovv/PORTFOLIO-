@@ -237,3 +237,33 @@ const observer = new IntersectionObserver(
 sections.forEach((section) => {
   observer.observe(section);
 });
+
+// Defer heavy section backgrounds until they are near viewport.
+const lazyBgElements = document.querySelectorAll("[data-bg]");
+if ("IntersectionObserver" in window) {
+  const bgObserver = new IntersectionObserver(
+    (entries, observerRef) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const bgPath = el.getAttribute("data-bg");
+        if (bgPath) {
+          el.style.backgroundImage = `url('${bgPath}')`;
+          el.removeAttribute("data-bg");
+        }
+        observerRef.unobserve(el);
+      });
+    },
+    { rootMargin: "300px 0px" }
+  );
+
+  lazyBgElements.forEach((el) => bgObserver.observe(el));
+} else {
+  lazyBgElements.forEach((el) => {
+    const bgPath = el.getAttribute("data-bg");
+    if (bgPath) {
+      el.style.backgroundImage = `url('${bgPath}')`;
+      el.removeAttribute("data-bg");
+    }
+  });
+}

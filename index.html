@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Kamolov Doniyor — front-end developer Portfolio">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" />
   <link rel="site icon" href="./images/icons/siteicon.png" />
   <title>PRO - PORTFOLIO</title>
   <link rel="stylesheet" href="./css/main.css" />
@@ -113,13 +117,15 @@
 </section>
 <section class="iknow" id="iknow">
   <h1 lang="iknowTitle" class="section-title animate-on-scroll"></h1>
-  <div id="tech-rotation">
+  <div id="tech-rotation" data-bg="./images/backgraunds/backgroundf.png">
     <div class="tech-rotation-container">
       <!-- center VS Code -->
       <div class="tech-center-icon">
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
         alt="VS Code"
+        loading="lazy"
+        decoding="async"
         class="tech-vscode-icon"
         />
       </div>
@@ -145,6 +151,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
         alt="HTML5"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -152,6 +160,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
         alt="CSS3"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -159,6 +169,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
         alt="JavaScript"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -166,6 +178,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg"
         alt="SCSS"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -173,6 +187,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"
         alt="Bootstrap"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -180,6 +196,8 @@
         <img
         src="https://swiperjs.com/images/swiper-logo.svg"
         alt="SwiperJS"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -187,6 +205,8 @@
         <img
         src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg"
         alt="Figma"
+        loading="lazy"
+        decoding="async"
         class="tech-icon "
         />
       </div>
@@ -221,7 +241,7 @@
 </div>
 </div>
 </section>
-<section id="mypro" class="projects-section">
+<section id="mypro" class="projects-section" data-bg="./images/backgraunds/backgrouns.png">
   <div class="container">
     <h2 lang="projectsSection" class="section-title animate-on-scroll"></h2>
     
@@ -234,7 +254,7 @@
     
   </div>
 </section>
-<section id="contact" class="contact-section">
+<section id="contact" class="contact-section" data-bg="./images/backgraunds/backgroundf.png">
   <h1 lang="contactTitle" class="section-title animate-on-scroll"></h1>
   <div class="container">
     <div class="contact-wrapper animate-on-scroll ripple">
@@ -376,9 +396,9 @@
 </svg>
 <p id="toast-notif"></p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/script.js"></script>
-<script src="./js/projects.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script defer src="./js/main.js"></script>
+<script defer src="./js/script.js"></script>
+<script defer src="./js/projects.js"></script>
 </body>
 </html>
