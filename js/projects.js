@@ -39,7 +39,7 @@ function renderProjects() {
       <img src="${p.propic}" class="project-img" loading="lazy" decoding="async" alt="${p.proname}" />
       <h3 class="project-title" lang="${p.proname}"></h3>
       <p class="project-desc" lang="${p.prodesc}"></p>
-      <a href="${p.prolink}"  target="_blank" class="btn">Live Demo</a>
+      <a href="${p.prolink}"  target="_blank" class="btn" lang="liveDemo"></a>
       `;
     projectsContainer.appendChild(card);
   });
