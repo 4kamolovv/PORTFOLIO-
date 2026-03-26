@@ -188,6 +188,10 @@ function setLanguage(lang) {
   : "Uzbek";
   
   document.getElementById("selected-lang").textContent = displayText;
+
+  document.dispatchEvent(
+    new CustomEvent("app:language-changed", { detail: { lang: actualLang } })
+  );
 }
 setLanguage("en");
 // Dropdown til tanlash event

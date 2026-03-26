@@ -69,6 +69,10 @@ body {
   font-family: "Inter", sans-serif;
   overflow-x: hidden !important;
 }
+
+html {
+  scrollbar-gutter: stable;
+}
 .container {
   width: min(1140px, 100%);
   margin-inline: auto;
