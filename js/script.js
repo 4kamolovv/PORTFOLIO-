@@ -1,5 +1,6 @@
 const CONTACT_TO_EMAIL = "f3281a3cb3c541aaddc873d88b829250";
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_TO_EMAIL}`;
+const WARNING_COLOR = "#fbbc04";
 
 // DOM elements
 const clForm = document.querySelector(".cl-form");
@@ -71,7 +72,7 @@ form.addEventListener("submit", async function (e) {
   let hasEmpty = false;
   inputs.forEach((input, idx) => {
     if (!input.value.trim()) {
-      input.style.border = "2px solid #FF0000";
+      input.style.border = `2px solid ${WARNING_COLOR}`;
       hasEmpty = true;
     } else {
       input.style.border = "2px solid #39FF14";
@@ -81,9 +82,9 @@ form.addEventListener("submit", async function (e) {
   const lang = getActiveLang();
 
   if (hasEmpty) {
-    submitBtn.style.border = "2px solid #FF0000";
-    submitBtn.style.color = "#FF0000";
-    showToast(t(lang, "Plsfilltoast", "Please fill all fields"), "#FF0000", 3000);
+    submitBtn.style.border = `2px solid ${WARNING_COLOR}`;
+    submitBtn.style.color = WARNING_COLOR;
+    showToast("warning", "Plsfilltoast");
     return;
   }
 
@@ -112,7 +113,7 @@ form.addEventListener("submit", async function (e) {
       message: clmessage
     });
 
-    showToast(t(lang, "SendingToast", "Message sent"), "#39FF14", 5000);
+    showToast("success", "SendingToast");
 
     // Reset button and inputs
     resetSubmitButton(lang);
@@ -122,7 +123,7 @@ form.addEventListener("submit", async function (e) {
       input.style.border = originalInputBorders[idx];
     });
   } catch (error) {
-    showToast(t(lang, "erSendingToast", "Message was not sent"), "#FF0000", 5000);
+    showToast("error", "erSendingToast");
     resetSubmitButton(lang);
     submitBtn.style.border = "2px solid #FF0000";
     submitBtn.style.color = "#FF0000";

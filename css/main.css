@@ -93,32 +93,109 @@ a {
 .db {
   display: block;
 }
-.toast {
+#toast-container {
   position: fixed;
-  top: 10px; /* yuqorida chiqadi */
-  right: -200px; /* ekrandan tashqarida boshlanadi */
-  backdrop-filter: var(--glass-backdrop);
-  background: var(--glass-background);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  padding: 10px 15px;
-  border-left: 3.2px solid;
-  border-radius: 0 3px 3px 0;
+  top: 20px;
+  right: 20px;
+  width: min(340px, calc(100vw - 32px));
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border: var(--glass-border);
+  border-left: 5px solid;
+  border-radius: 0 6px 6px 0;
+  backdrop-filter: var(--glass-backdrop);
+  background: var(--glass-background);
+  box-shadow: var(--glass-shadow);
   font-size: 16px;
   font-weight: 500;
-  opacity: 0;
-  transition: all 0.5s ease;
-  z-index: 9999;
+  pointer-events: auto;
+  animation: slideIn 0.4s ease forwards;
 }
-.toast p {
-  margin: 0 0 3px 0;
+
+.toast .message {
+  flex: 1;
+  min-width: 0;
+  margin-left: 4px;
 }
-.toast.show {
-  right: 20px;
-  opacity: 1;
+
+.message strong {
+  display: block;
+  font-weight: 600;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.message-desc {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.toast.success {
+  border-left-color: #34a853;
+  color: #1e7f4c;
+}
+
+.toast.error {
+  border-left-color: #d93025;
+  color: #c54b53;
+}
+
+.toast.warning {
+  border-left-color: #fbbc04;
+  color: #b58f23;
+}
+
+.toast button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.toast-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
 /* ripple btn */
@@ -504,10 +581,13 @@ a {
 .footer-content {
   width: 100%;
   min-height: 130px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
+}
+
+.footer-column:last-child {
+  justify-self: center;
 }
 
 .footer-column h4 {

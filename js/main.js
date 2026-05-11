@@ -18,66 +18,149 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // ripple>
-function showToast(message, color = "#39FF14", duration = 3000) {
-  const toast = document.getElementById("Toast");
-  const notif = document.getElementById("toast-notif");
-  const toastIcon = toast.querySelector("svg");
-  
-  notif.innerText = message;
-  toast.style.borderLeft = `3px solid ${color}`;
-  toast.style.color = color;
-  
-  // Set icon based on color (red = X, green = check)
-  if (color === "#FF0000") {
-    toastIcon.innerHTML = `
-      <path fill="currentColor" d="M18.364 5.636l-1.414-1.414L12 9.172 
-      7.05 4.222 5.636 5.636 10.586 10.586 
-      5.636 15.536l1.414 1.414L12 12.828
-      l4.95 4.95 1.414-1.414L13.414 10.586l4.95-4.95z"/>
-    `;
-    
-    // ❌ Error sound
-    const erraudio = new Audio("sounds/notiferror.wav");
-    erraudio.volume = 1;
-    erraudio.play();
-  } else {
-    toastIcon.innerHTML = `
-      <path fill="currentColor" d="m9.55 18l-5.7-5.7 
-      1.425-1.425L9.55 15.15l9.175-9.175 
-      1.425 1.425z"/>
-    `;
-    
-    // ✅ Success sound
-    const audio = new Audio("sounds/notifisuccess.wav");
-    audio.volume = 1;
-    audio.play();
+let toastSound = null;
+const MAX_SAME_TOASTS = 3;
+const TOAST_EXIT_MS = 400;
+
+function getToastSound() {
+  if (!toastSound) {
+    toastSound = new Audio("sounds/notiferror.wav");
+    toastSound.volume = 1;
   }
-  
-  toast.classList.add("show");
-  
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, duration);
+  return toastSound;
 }
+
+function getToastLang() {
+  const savedLang = localStorage.getItem("selectedLang") || "SystemLang";
+  return savedLang === "SystemLang" ? getSystemLanguage() : savedLang;
+}
+
+function getToastText(key) {
+  if (!key) return "";
+  const lang = getToastLang();
+  return translations?.[lang]?.[key] || key;
+}
+
+function getToastIcon(type) {
+  if (type === "error") {
+    return `<svg class="toast-icon" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="15" y1="9" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="9" y1="9" x2="15" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  if (type === "warning") {
+    return `<svg class="toast-icon" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2"
+      d="M12 9v4M12 17h.01M1 21h22L12 2 1 21z"
+      stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  }
+
+  return `<svg class="toast-icon" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2"
+    d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+function removeToast(toast) {
+  if (!toast || toast.dataset.removing === "true") return;
+  toast.dataset.removing = "true";
+  toast.style.animation = "slideOut 0.4s ease forwards";
+  toast.addEventListener("animationend", () => toast.remove(), { once: true });
+  setTimeout(() => toast.remove(), TOAST_EXIT_MS + 100);
+}
+
+function showToast(type, titleKey, descKey = null) {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const safeType = ["success", "error", "warning"].includes(type) ? type : "success";
+  const title = getToastText(titleKey);
+  const desc = descKey ? getToastText(descKey) : "";
+  const toastKey = JSON.stringify([safeType, title, desc]);
+  const sameToasts = Array.from(container.querySelectorAll(".toast")).filter(
+    (item) =>
+      item.dataset.toastKey === toastKey && item.dataset.removing !== "true"
+  );
+  if (sameToasts.length >= MAX_SAME_TOASTS) return;
+
+  const toast = document.createElement("div");
+  toast.className = `toast ${safeType}`;
+  toast.dataset.toastKey = toastKey;
+  toast.innerHTML = `
+    ${getToastIcon(safeType)}
+    <div class="message">
+      <strong>${title}</strong>
+      ${desc ? `<p class="message-desc">${desc}</p>` : ""}
+    </div>
+    <button class="close-btn" type="button" aria-label="Close toast">
+      <svg class="toast-icon" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="2"
+        d="M6 6l12 12M6 18L18 6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  `;
+
+  container.appendChild(toast);
+
+  if (safeType === "warning" || safeType === "error") {
+    const sound = getToastSound();
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
+
+  toast.querySelector(".close-btn").addEventListener("click", () => {
+    removeToast(toast);
+  });
+
+  setTimeout(() => removeToast(toast), 10000);
+}
+
 document.querySelectorAll("[toast]").forEach((el) => {
   el.addEventListener("click", () => {
     const message = el.getAttribute("toast-text") || "Undefind!?";
-    showToast(message, "#39FF14", 3000);
+    showToast("success", message);
+  });
+});
+document.querySelectorAll("[successToast]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    showToast("success", btn.getAttribute("successToast"));
+  });
+});
+document.querySelectorAll("[errorToast]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    showToast("error", btn.getAttribute("errorToast"));
+  });
+});
+document.querySelectorAll("[warningToast]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    showToast(
+      "warning",
+      btn.getAttribute("warningToast"),
+      btn.getAttribute("descToast")
+    );
   });
 });
 const copyText = document.getElementById("copyText");
-copyText.addEventListener("click", () => {
-  navigator.clipboard.writeText(copyText.innerText).then(() => {
-    let lang = localStorage.getItem("selectedLang") || "SystemLang";
-    if (lang === "SystemLang") {
-      lang = getSystemLanguage();
-    }
-    
-    const copiedMsg = translations[lang]["copiedText"];
-    
-    showToast(copiedMsg, "#39FF14", 3000);
+if (copyText) {
+  copyText.addEventListener("click", () => {
+    navigator.clipboard.writeText(copyText.innerText).then(() => {
+      let lang = localStorage.getItem("selectedLang") || "SystemLang";
+      if (lang === "SystemLang") {
+        lang = getSystemLanguage();
+      }
+
+      const copiedMsg = translations[lang]?.["copiedText"] || "Copied";
+
+      showToast("success", copiedMsg);
+    }).catch(() => {
+      showToast("error", "Copy failed");
+    });
   });
-});
+}
 // Toast function>
 const bar = document.getElementById("progress-bar");
 bar.style.width = "10%";
@@ -178,14 +261,16 @@ function setLanguage(lang) {
   localStorage.setItem("selectedLang", lang); //
   
   // Dropdown
+  const langLabelKeys = {
+    SystemLang: "langSystem",
+    en: "langEnglish",
+    ru: "langRussian",
+    uz: "langUzbek",
+  };
   const displayText =
-  lang === "SystemLang"
-  ? "System"
-  : lang === "en"
-  ? "English"
-  : lang === "ru"
-  ? "Russian"
-  : "Uzbek";
+    translations[actualLang][langLabelKeys[lang]] ||
+    translations[actualLang].langUzbek ||
+    "Uzbek";
   
   document.getElementById("selected-lang").textContent = displayText;
 
@@ -215,13 +300,13 @@ document.querySelectorAll(".lang-ahref").forEach((link) => {
     if (lang === "SystemLang") {
       //
       let systemLang = getSystemLanguage(); // misol: "en", "ru", "uz"
-      toastMsg = translations[systemLang]["LangisSystem"];
+      toastMsg = translations[systemLang]?.["LangisSystem"] || "System language selected";
     } else {
       //
-      toastMsg = translations[lang]["ChangedLang"];
+      toastMsg = translations[lang]?.["ChangedLang"] || "Language changed";
     }
     
-    showToast(toastMsg, "#39FF14", 5000); //
+    showToast("success", toastMsg); //
   });
 });
 const sections = document.querySelectorAll(".animate-on-scroll");
