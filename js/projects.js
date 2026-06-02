@@ -15,7 +15,7 @@ function getDescToggleLabels() {
   if (lang === "SystemLang" && typeof getSystemLanguage === "function") {
     lang = getSystemLanguage();
   }
-
+  
   if (lang === "ru") return { more: "Подробнее", less: "Свернуть" };
   if (lang === "en") return { more: "Read more", less: "Show less" };
   return { more: "Batafsil", less: "Yopish" };
@@ -23,14 +23,14 @@ function getDescToggleLabels() {
 
 function toggleDescription(card) {
   if (!card) return;
-
+  
   const desc = card.querySelector(".project-desc");
   const toggleBtn = card.querySelector(".project-desc-toggle");
   if (!desc || !toggleBtn || toggleBtn.hidden) return;
-
+  
   const labels = getDescToggleLabels();
   const willExpand = !desc.classList.contains("expanded");
-
+  
   desc.classList.toggle("expanded", willExpand);
   toggleBtn.textContent = willExpand ? labels.less : labels.more;
   desc.setAttribute("title", willExpand ? labels.less : labels.more);
@@ -39,22 +39,22 @@ function toggleDescription(card) {
 function updateDescriptionClampState() {
   if (!projectsContainer) return;
   const labels = getDescToggleLabels();
-
+  
   const descriptions = projectsContainer.querySelectorAll(".project-desc");
   descriptions.forEach((desc) => {
     const card = desc.closest(".project-card");
     const toggleBtn = card?.querySelector(".project-desc-toggle");
     const wasExpanded = desc.classList.contains("expanded");
-
+    
     // Measure while collapsed to detect true overflow state.
     if (wasExpanded) desc.classList.remove("expanded");
     desc.classList.remove("can-expand");
     desc.removeAttribute("title");
-
+    
     const canExpand = desc.scrollHeight - desc.clientHeight > 2;
-
+    
     if (wasExpanded && canExpand) desc.classList.add("expanded");
-
+    
     if (canExpand) {
       desc.classList.add("can-expand");
       desc.setAttribute("title", wasExpanded ? labels.less : labels.more);
@@ -83,37 +83,86 @@ async function loadProjects() {
   }
 }
 
+
+
 function renderProjects() {
   projectsContainer.innerHTML = "";
   const visibleCount = getVisibleCount();
-
+  
   const slice = projectsData.slice(currentIndex, currentIndex + visibleCount);
-
-  slice.forEach((p, idx) => {
+  
+  const priorityProjects = {
+    im1: null,
+    im2: null,
+    im3: null,
+  };
+  
+  slice.forEach((project) => {
+    if (project.prim && priorityProjects[project.prim] === null) {
+      priorityProjects[project.prim] = project;
+    }
+  });
+  
+  const orderedProjects = [...slice];
+  
+  // im1 -> 1-o'rin
+  if (priorityProjects.im1) {
+    const idx = orderedProjects.indexOf(priorityProjects.im1);
+    if (idx > -1) {
+      orderedProjects.splice(idx, 1);
+      orderedProjects.splice(0, 0, priorityProjects.im1);
+    }
+  }
+  
+  // im2 -> 2-o'rin
+  if (priorityProjects.im2 && orderedProjects.length > 1) {
+    const idx = orderedProjects.indexOf(priorityProjects.im2);
+    if (idx > -1) {
+      orderedProjects.splice(idx, 1);
+      orderedProjects.splice(1, 0, priorityProjects.im2);
+    }
+  }
+  
+  // im3 -> 3-o'rin
+  if (priorityProjects.im3 && orderedProjects.length > 2) {
+    const idx = orderedProjects.indexOf(priorityProjects.im3);
+    if (idx > -1) {
+      orderedProjects.splice(idx, 1);
+      orderedProjects.splice(2, 0, priorityProjects.im3);
+    }
+  }
+  
+  orderedProjects.forEach((p, idx) => {
     const eagerImage = idx === 0;
     const card = document.createElement("div");
-    card.className = "project-card ripple project-card-enter";
+    card.className = `project-card ripple project-card-enter ${
+      p.prim ? "project-priority" : ""
+    }`;
     card.innerHTML = `
-      <div class="project-img-wrap">
-        <img
-          src="${p.propic}"
-          class="project-img"
-          loading="${eagerImage ? "eager" : "lazy"}"
-          fetchpriority="${eagerImage ? "high" : "auto"}"
-          decoding="async"
-          width="1280"
-          height="720"
-          alt="${p.proname}"
-        />
-      </div>
-      <h3 class="project-title" lang="${p.proname}"></h3>
-      <p class="project-desc" lang="${p.prodesc}"></p>
-      <div class="project-actions">
-        <button type="button" class="project-desc-toggle" hidden></button>
-        <a href="${p.prolink}" target="_blank" class="btn" lang="liveDemo"></a>
-      </div>
-      `;
-
+  ${p.prim ? '' : ''}
+    
+  <div class="project-img-wrap">
+    <img
+      src="${p.propic}"
+      class="project-img"
+      loading="${eagerImage ? "eager" : "lazy"}"
+      fetchpriority="${eagerImage ? "high" : "auto"}"
+      decoding="async"
+      width="1280"
+      height="720"
+      alt="${p.proname}"
+    />
+  </div>
+    
+  <h3 class="project-title" lang="${p.proname}"></h3>
+  <p class="project-desc" lang="${p.prodesc}"></p>
+    
+  <div class="project-actions">
+    <button type="button" class="project-desc-toggle" hidden></button>
+    <a href="${p.prolink}" target="_blank" class="btn" lang="liveDemo"></a>
+  </div>
+`;
+    
     const projectImg = card.querySelector(".project-img");
     const imgWrap = card.querySelector(".project-img-wrap");
     if (projectImg && imgWrap) {
@@ -124,16 +173,16 @@ function renderProjects() {
         imgWrap.classList.add("img-error");
       });
     }
-
+    
     projectsContainer.appendChild(card);
   });
-
+  
   updateButtons(visibleCount);
-
+  
   // refresh language for newly added elements
   let currentLang = localStorage.getItem("selectedLang") || "SystemLang";
   if (typeof setLanguage === "function") setLanguage(currentLang);
-
+  
   requestAnimationFrame(updateDescriptionClampState);
 }
 
@@ -183,7 +232,7 @@ projectsContainer?.addEventListener("click", (e) => {
     toggleDescription(toggleBtn.closest(".project-card"));
     return;
   }
-
+  
   const desc = e.target.closest(".project-desc.can-expand");
   if (desc) toggleDescription(desc.closest(".project-card"));
 });
@@ -198,12 +247,12 @@ function initProjectsWhenVisible() {
     loadProjects();
     return;
   }
-
+  
   if (!("IntersectionObserver" in window)) {
     loadProjects();
     return;
   }
-
+  
   const sectionObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -214,7 +263,7 @@ function initProjectsWhenVisible() {
     },
     { rootMargin: "400px 0px" }
   );
-
+  
   sectionObserver.observe(projectsSection);
 }
 
