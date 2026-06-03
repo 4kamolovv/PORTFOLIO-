@@ -206,7 +206,7 @@
 
 .about-text {
   color: var(--third-color);
-  font-size: clamp(21px, 2.1vw, 34px);
+  font-size: clamp(21px, 2.1vw, 28px);
   font-weight: 700;
   font-family: "Inter", sans-serif;
   text-align: start;
