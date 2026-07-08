@@ -1,4 +1,3 @@
-
 .wrapper-signprime {
   display: flex;
   align-items: center;
@@ -62,7 +61,7 @@
   .about-left-wrap {
     padding: 20px 16px;
   }
-  
+
   .contact-wrapper {
     padding: 20px;
   }
@@ -146,9 +145,9 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
   background: linear-gradient(
-  160deg,
-  rgba(0, 191, 255, 0.2),
-  rgba(2, 13, 28, 0.35)
+    160deg,
+    rgba(0, 191, 255, 0.2),
+    rgba(2, 13, 28, 0.35)
   );
   position: relative;
 }
@@ -159,9 +158,9 @@
   inset: 0;
   pointer-events: none;
   background: linear-gradient(
-  to top,
-  rgba(0, 0, 0, 0.18) 0%,
-  rgba(0, 0, 0, 0) 45%
+    to top,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0) 45%
   );
 }
 
@@ -180,9 +179,9 @@
   border-radius: 22px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: linear-gradient(
-  140deg,
-  rgba(255, 255, 255, 0.04),
-  rgba(255, 255, 255, 0.01)
+    140deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.01)
   );
   backdrop-filter: blur(4px);
   display: flex;
@@ -254,7 +253,6 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-
 
 .hero-stats {
   margin-top: auto;
@@ -394,7 +392,7 @@
   width: 90px;
   height: 90px;
   transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-175px)
-  rotate(calc(-1 * var(--angle)));
+    rotate(calc(-1 * var(--angle)));
   animation: tech-counter-rotate 45s linear infinite;
 }
 
@@ -428,11 +426,11 @@
 @keyframes tech-counter-rotate {
   from {
     transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-210px)
-    rotate(calc(-1 * var(--angle)));
+      rotate(calc(-1 * var(--angle)));
   }
   to {
     transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-210px)
-    rotate(calc(-1 * var(--angle) - 360deg));
+      rotate(calc(-1 * var(--angle) - 360deg));
   }
 }
 
@@ -454,16 +452,16 @@
     width: 70px;
     height: 70px;
     transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-125px)
-    rotate(calc(-1 * var(--angle)));
+      rotate(calc(-1 * var(--angle)));
   }
   @keyframes tech-counter-rotate {
     from {
       transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-125px)
-      rotate(calc(-1 * var(--angle)));
+        rotate(calc(-1 * var(--angle)));
     }
     to {
       transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-125px)
-      rotate(calc(-1 * var(--angle) - 360deg));
+        rotate(calc(-1 * var(--angle) - 360deg));
     }
   }
 }
@@ -525,7 +523,9 @@
   box-shadow: var(--glass-shadow);
   padding: 20px;
   border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .project-img-wrap {
@@ -536,9 +536,9 @@
   overflow: hidden;
   margin-bottom: 15px;
   background: linear-gradient(
-  135deg,
-  rgba(255, 255, 255, 0.08),
-  rgba(255, 255, 255, 0.03)
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
   );
 }
 
@@ -578,13 +578,13 @@
 .project-desc {
   font-size: 14px;
   line-height: 1.5;
-  
+
   max-height: 42px; /* 2 qator */
   overflow: hidden;
-  
+
   transition:
-  max-height 0.6s cubic-bezier(0.22, 1, 0.22, 1),
-  opacity 0.3s ease;
+    max-height 0.6s cubic-bezier(0.22, 1, 0.22, 1),
+    opacity 0.3s ease;
 }
 
 .project-desc.expanded {
@@ -646,25 +646,12 @@
   justify-content: center;
 }
 
-/* .project-btn {
-backdrop-filter: var(--glass-backdrop);
-background: var(--base-color);
-border: var(--glass-border);
-box-shadow: var(--glass-shadow);
-display: inline-block;
-padding: 8px 16px;
-color: #fff;
-border-radius: 6px;
-text-decoration: none;
-user-select: none;
-} */
-
 .contact-section {
   padding-block: 60px;
   align-items: center;
   justify-content: center;
   background-color: rgba(2, 13, 28, 0.85);
-  background-size: 100% 100%;  /* ← shu muhim */
+  background-size: 100% 100%; /* ← shu muhim */
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -911,7 +898,7 @@ user-select: none;
     display: flex;
     height: 100%;
   }
-  
+
   .container {
     margin-inline: auto;
     padding: 5px;
@@ -944,68 +931,67 @@ user-select: none;
     margin-top: 56px;
     gap: 12px;
   }
-  
+
   .hero-photo-card {
     height: var(--hero-box-h);
     max-width: 100%;
     border-radius: 18px;
   }
-  
+
   .hero-copy {
     height: var(--hero-box-h);
     max-width: 100%;
     padding: 10px 10px;
     overflow: hidden;
   }
-  
+
   .about-text,
   .about-logo-wrap {
     text-align: start;
     justify-content: flex-start;
   }
-  
+
   .about-text {
     font-size: clamp(18px, 2.6vw, 26px);
     line-height: 1.14;
     max-width: 100%;
     margin-bottom: 8px;
   }
-  
+
   .about-logo-wrap {
     gap: 6px;
     flex-wrap: wrap;
   }
-  
+
   .about-desc {
     font-size: 12px;
   }
-  
+
   .hero-meta {
     display: none;
   }
-  
+
   .hero-stats {
     display: none;
   }
-  
-  
+
   .about-wrapper {
     margin-top: 100px;
   }
-  
+
   .about-left-wrap {
     padding: 24px 28px;
   }
-  
+
   .df-social {
     flex-direction: column;
     gap: 14px;
   }
-  
+
   .contact-form button {
     width: 100%;
   }
-  
+
   .proj-btn {
     width: 32px;
     height: 68px;
@@ -1019,7 +1005,7 @@ user-select: none;
     padding: 10px 12px;
     border-radius: 22px;
   }
-  
+
   .nav-wrap {
     width: 100%;
     flex-wrap: wrap;
@@ -1027,12 +1013,12 @@ user-select: none;
     row-gap: 10px;
     align-items: center;
   }
-  
+
   .navbar .logo {
     margin: 0 4px 0 0;
     font-size: 20px;
   }
-  
+
   .nav-link-wrapper {
     order: 3;
     width: 100%;
@@ -1042,18 +1028,18 @@ user-select: none;
     margin-top: 4px;
     gap: 10px 12px;
   }
-  
+
   .nav-item {
     width: auto;
     min-width: max-content;
   }
-  
+
   .nav-item .nav-link {
     width: auto;
     text-align: center;
     padding: 6px 8px;
   }
-  
+
   .nav-item .dropdown {
     position: absolute;
     left: 0;
@@ -1067,113 +1053,114 @@ user-select: none;
     opacity: 0;
     pointer-events: none;
     transform: translateY(4px);
-    transition: opacity 0.22s ease, transform 0.22s ease;
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease;
   }
-  
+
   .nav-item:hover .dropdown,
   .nav-item:focus-within .dropdown {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
   }
-  
+
   .icon-text {
     order: 2;
     margin-left: auto;
     margin-right: 0;
     align-self: center;
   }
-  
+
   .github-text {
     display: none;
   }
-  
+
   .about-left-wrap {
     padding: 20px 16px;
   }
-  
+
   .hero-photo-card {
     max-width: 150px;
     border-radius: 14px;
   }
-  
+
   .about-text {
     font-size: clamp(16px, 4.2vw, 22px);
     max-width: 100%;
     line-height: 1.16;
     margin-bottom: 8px;
   }
-  
+
   .intro-text {
     grid-template-columns: minmax(120px, 150px) minmax(0, 1fr);
     align-items: start;
     gap: 10px;
   }
-  
+
   .hero-copy {
     padding: 8px;
     border-radius: 12px;
   }
-  
+
   .about-logo-wrap {
     gap: 5px;
   }
-  
+
   .about-desc {
     font-size: 12px;
   }
-  
+
   .hero-meta {
     display: none;
   }
-  
-  
+
   .quote-open,
   .quote-close {
     width: 22px;
     height: 22px;
   }
-  
+
   .quote-open {
     top: 14px;
     left: 12px;
   }
-  
+
   .quote-close {
     right: 12px;
     bottom: 14px;
   }
-  
+
   .about-title {
     text-align: left;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .projects-section .df {
     width: 100%;
     align-items: stretch;
   }
-  
+
   .project-card {
     padding: 16px;
   }
-  
+
   .proj-btn {
     display: none;
   }
-  
+
   .social-infa-1,
   .social-infa-2 {
     font-size: 22px;
   }
-  
+
   .social-list {
     flex-wrap: wrap;
   }
-  
+
   .contact-wrapper {
     padding: 16px;
   }
@@ -1185,11 +1172,11 @@ user-select: none;
     grid-template-columns: 150px minmax(0, 1fr);
     gap: 10px;
   }
-  
+
   .hero-copy {
     padding: 8px;
   }
-  
+
   .about-text {
     font-size: 20px;
     margin-bottom: 6px;
@@ -1200,7 +1187,7 @@ user-select: none;
   .navbar .logo {
     font-size: 18px;
   }
-  
+
   .nav-link-wrapper {
     justify-content: flex-start;
   }
@@ -1210,33 +1197,34 @@ user-select: none;
   .tech-rotation-container {
     width: 280px;
     height: 280px;
+    margin-top: 30px;
   }
-  
+
   .tech-vscode-icon {
     width: 78px;
     height: 78px;
   }
-  
+
   .tech-rotating-ring {
     width: 205px;
     height: 205px;
   }
-  
+
   .tech-orbit-icon {
     width: 50px;
     height: 50px;
     transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
-    rotate(calc(-1 * var(--angle)));
+      rotate(calc(-1 * var(--angle)));
   }
-  
+
   @keyframes tech-counter-rotate {
     from {
       transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
-      rotate(calc(-1 * var(--angle)));
+        rotate(calc(-1 * var(--angle)));
     }
     to {
       transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-102px)
-      rotate(calc(-1 * var(--angle) - 360deg));
+        rotate(calc(-1 * var(--angle) - 360deg));
     }
   }
 }
@@ -1248,43 +1236,43 @@ user-select: none;
   .container {
     padding-inline: 12px;
   }
-  
+
   .navbar {
     width: calc(100% - 12px);
     margin: 8px auto 12px;
     padding: 10px 12px;
     border-radius: 20px;
   }
-  
+
   .nav-wrap {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-    "logo github"
-    "links links";
+      "logo github"
+      "links links";
     align-items: center;
     row-gap: 8px;
     column-gap: 8px;
   }
-  
+
   .nav-wrap > .logo {
     grid-area: logo;
     margin: 0;
     min-width: 0;
     font-size: 18px;
   }
-  
+
   .icon-text {
     grid-area: github;
     margin: 0;
     justify-self: end;
     align-self: center;
   }
-  
+
   .github-text {
     display: none;
   }
-  
+
   .nav-link-wrapper {
     grid-area: links;
     width: 100%;
@@ -1293,29 +1281,29 @@ user-select: none;
     justify-content: flex-start;
     flex-wrap: wrap;
   }
-  
+
   .nav-item {
     width: auto;
     min-width: 0;
   }
-  
+
   .nav-item .nav-link {
     font-size: 14px;
     padding: 6px 8px;
     white-space: nowrap;
   }
-  
+
   .intro-text {
     grid-template-columns: 1fr;
     gap: 12px;
     margin-top: 40px;
     min-width: 0;
   }
-  
+
   .intro-text > div {
     min-width: 0;
   }
-  
+
   .hero-photo-card {
     height: auto;
     aspect-ratio: 1 / 1;
@@ -1323,7 +1311,7 @@ user-select: none;
     margin-inline: auto;
     border-radius: 16px;
   }
-  
+
   .hero-copy {
     height: auto;
     width: 100%;
@@ -1331,7 +1319,7 @@ user-select: none;
     padding: 10px;
     border-radius: 14px;
   }
-  
+
   .about-text {
     font-size: clamp(18px, 7.4vw, 30px);
     max-width: 100%;
@@ -1339,41 +1327,170 @@ user-select: none;
     line-height: 1.16;
     overflow-wrap: anywhere;
   }
-  
+
   .about-logo-wrap {
     gap: 5px;
     flex-wrap: wrap;
   }
-  
+
   .about-desc {
     font-size: 13px;
   }
-  
-  .hero-meta {
+
+  .hero-stats {
     display: none;
   }
 }
 
 @media (max-width: 380px) {
+  #tech-rotation {
+    margin-top: 1px;
+  }
+  #mypro {
+    padding-top: 1px;
+  }
+  #contact {
+    padding-top: 1px;
+  }
+  .custom-footer {
+    margin-top: 5px!important;
+  }
+  #aboutme {
+    margin-bottom: 70px!important;
+    margin-top: 70px !important;
+  }
+  
   .nav-wrap > .logo {
     font-size: 16px;
   }
-  
+
   .nav-link-wrapper {
     gap: 6px;
   }
-  
+
   .nav-item .nav-link {
     font-size: 13px;
     padding: 5px 7px;
   }
-  
+
   .hero-photo-card {
     max-width: min(74vw, 190px);
   }
-  
+
   .about-text {
     font-size: clamp(17px, 7vw, 24px);
   }
 }
 
+/* =====================================================================
+QO'SHIMCHA MOBIL RESPONSIVE TUZATISH (v2)
+Diqqat: yuqoridagi hech bir qoida o'chirilmadi yoki o'zgartirilmadi.
+Bu yerda faqat pastdagi 3 ta narsa TUZATILADI, boshqa hech narsaga
+(ripple, scrollbar, toast, rang, shrift va h.k.) tegilmaydi:
+1) hero-stats (17+ / 24+ / ~2) mobil va planshetda YASHIRILMASIN,
+aksincha kichikroq va sig'adigan holatga o'tsin.
+2) "TOP PROJECT" lentasi kichik ekranda karta chetidan chiqib
+sahifa qirg'og'idan kesilib qolmasin.
+3) Juda kichik telefonlarda (<=420px) navbar va matnlar yanada
+yaxshiroq sig'sin.
+===================================================================== */
+
+/* 1) hero-stats endi yashirilmaydi — 900px va 640px'dagi
+"display: none" qoidalaridan KEYIN kelgani uchun ustun bo'ladi */
+@media (max-width: 900px) {
+  .hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .hero-stat {
+    padding: 5px 4px;
+  }
+  .hero-stat-role-text {
+    font-size: 12px;
+  }
+  .hero-stat-num {
+    font-size: 13px;
+  }
+  .hero-stat-label {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .hero-stat {
+    padding: 5px 3px;
+  }
+  .hero-stat-role-text {
+    font-size: 10.5px;
+  }
+  .hero-stat-num {
+    font-size: 12px;
+  }
+  .hero-stat-label {
+    font-size: 8px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 2) "TOP PROJECT" lentasi kartadan tashqariga chiqib
+sahifa chetidan kesilib qolmasligi uchun karta ichida ushlab turamiz */
+.project-card {
+  overflow: hidden;
+}
+
+/* 3) Juda kichik telefonlar uchun qo'shimcha moslashuv */
+@media (max-width: 420px) {
+  .navbar {
+    width: calc(100% - 10px);
+    padding: 8px 10px;
+  }
+  .nav-item .nav-link {
+    font-size: 12.5px;
+    padding: 5px 6px;
+  }
+  .hero-photo-card {
+    max-width: min(70vw, 170px);
+  }
+  .about-text {
+    font-size: clamp(16px, 6.6vw, 22px);
+  }
+  .about-desc {
+    font-size: 11px;
+  }
+  .social-infa-1,
+  .social-infa-2 {
+    font-size: 19px;
+  }
+  .project-title {
+    font-size: 17px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 14px;
+    padding: 9px;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar {
+    width: calc(100% - 8px);
+  }
+  .nav-item .nav-link {
+    font-size: 12px;
+    padding: 4px 5px;
+  }
+  .hero-photo-card {
+    max-width: min(68vw, 155px);
+  }
+  .about-text {
+    font-size: clamp(15px, 6.2vw, 20px);
+  }
+}

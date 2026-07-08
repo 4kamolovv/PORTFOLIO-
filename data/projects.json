@@ -3,31 +3,35 @@
         "proname": "project5Title",
         "propic": "images/image/imglogin.png",
         "prodesc": "project5Desc",
-        "prolink": "https://4kamolovv.github.io/auth/login.html"
+        "prolink": "https://4kamolovv.github.io/auth/login.html",
+        "prim": "im2"
     },
     {
         "proname": "project2Title",
         "propic": "images/image/testuzmodern.png",
         "prodesc": "project2Desc",
         "prolink": "https://4kamolovv.github.io/test.uz/",
-        "prim": "im2"
+        "prim": "im1"
     },
     {
         "proname": "project3Title",
         "propic": "images/image/imgavtotest.png",
         "prodesc": "project3Desc",
-        "prolink": "https://4kamolov.github.io/justavtotest/"
+        "prolink": "https://4kamolov.github.io/justavtotest/",
+        "prim": "im4"
     },
     {
         "proname": "project4Title",
         "propic": "images/image/nextcodepro.png",
         "prodesc": "project4Desc",
-        "prolink": "https://sensational-cocada-3179a7.netlify.app/"
+        "prolink": "https://sensational-cocada-3179a7.netlify.app/",
+        "prim": "im5"
     },
     {
         "proname": "project1Title",
         "propic": "images/image/imgmilliy.png",
         "prodesc": "project1Desc",
-        "prolink": "https://4kamolov.github.io/myfirstpro/"
+        "prolink": "https://4kamolov.github.io/myfirstpro/",
+        "prim": "im6"
     }
 ]
